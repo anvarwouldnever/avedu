@@ -1,7 +1,7 @@
 {
   "name": "avedu",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,13 +9,25 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/stack": "^7.4.7",
     "expo": "~53.0.20",
+    "expo-secure-store": "~14.2.3",
     "expo-status-bar": "~2.2.3",
+    "mobx-react-lite": "^4.1.0",
     "react": "19.0.0",
-    "react-native": "0.79.5"
+    "react-native": "0.79.5",
+    "react-native-gesture-handler": "^2.28.0",
+    "react-native-reanimated": "~3.17.4",
+    "expo-image": "~2.4.0",
+    "react-native-svg": "15.11.2",
+    "@expo/vector-icons": "^14.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react": "~19.0.10",
+    "typescript": "~5.8.3"
   },
   "private": true
 }
