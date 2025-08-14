@@ -9,6 +9,7 @@ const ChildStats = () => {
     const { s, vs } = useScale()
 
     return (
+
         <View style={{ backgroundColor: 'white', width: '100%', marginTop: vs(25), borderRadius: vs(30), padding: Platform.isPad? vs(20) : s(20), gap: vs(35), shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }}>
             
             <Text style={{ color: 'black', fontSize: vs(18), fontWeight: '600' }}>Успеваемость ребенка по четвертям:</Text>
@@ -96,6 +97,7 @@ const ChildStats = () => {
             </View>
 
         </View>
+        
     )
 }
 

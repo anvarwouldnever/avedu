@@ -10,7 +10,7 @@ const HomeScreen = () => {
     const { s, vs } = useScale()
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} bounces={true} style={{ flex: 1, padding: Platform.isPad? vs(20) : s(20), backgroundColor: 'white' }}>
+        <ScrollView showsVerticalScrollIndicator={false} bounces={true} style={{ flex: 1, padding: Platform.isPad? vs(20) : vs(20), backgroundColor: 'white' }}>
             
             <InfoContainer />
 
