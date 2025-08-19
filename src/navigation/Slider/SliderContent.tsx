@@ -14,6 +14,7 @@ const menuItems = [
     { screen: 'Tasks', icon: 'create-outline', label: translations[store.language].заданияребенка },
     { screen: 'Diary', icon: 'reader-outline', label: translations[store.language].дневникребенка },
     { screen: 'Schedule', icon: 'calendar-outline', label: translations[store.language].расписаниеуроков },
+    { screen: 'Profile', icon: 'person-outline', label: translations[store.language].мойпрофиль },
 ];
 
 const SliderContent = observer(({ onClose } : { onClose: () => void }) => {
