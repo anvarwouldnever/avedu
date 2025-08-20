@@ -14,6 +14,7 @@ import DiaryScreen from '../../screens/DiaryScreen';
 import ScheduleScreen from '../../screens/ScheduleScreen';
 import ProfileScreen from '../../screens/ProfileScreen';
 import { useNavigation } from '@react-navigation/native';
+import TaskScreen from '../../screens/TaskScreen';
 
 const Stack = createStackNavigator();
 
@@ -64,6 +65,7 @@ const Navigation = ({ openSlider } : { openSlider: () => void }) => {
             <Stack.Screen name="Diary" component={DiaryScreen} />
             <Stack.Screen name="Schedule" component={ScheduleScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Task" component={TaskScreen} />
         </Stack.Navigator>
     )
 }

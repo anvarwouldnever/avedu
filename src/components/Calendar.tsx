@@ -1,4 +1,4 @@
-import { View, Text, Button, Modal } from 'react-native'
+import { View, Button, Modal } from 'react-native'
 import React from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import { useScale } from '../hooks/useScale'
@@ -36,4 +36,4 @@ const Calendar = ({ birthday, onChange, cancel, done, show }) => {
     )
 }
 
-export default Calendar
+export default Calendar;

@@ -1,11 +1,14 @@
-import { View, Text, Platform } from 'react-native'
+import { View, Text, Platform, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Animated from 'react-native-reanimated'
 import { useScale } from '../../hooks/useScale'
+import { useNavigation } from '@react-navigation/native'
 
 const Completed = ({ section, getEnteringAnimation }) => {
 
     const { s, vs } = useScale()
+
+    const navigation = useNavigation()
 
     return (
         <Animated.ScrollView key={section} entering={getEnteringAnimation()} showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: vs(25), padding: vs(2) }} style={{ width: '100%', height: 'auto' }}>
@@ -14,7 +17,7 @@ const Completed = ({ section, getEnteringAnimation }) => {
                 const isLast = index === arr.length - 1;
 
                 return (
-                    <View key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Task')} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
                         
                         <View style={{ width: 'auto', backgroundColor: '#F0FCEE', height: '100%', paddingHorizontal: vs(20), paddingVertical: vs(10), borderRadius: vs(15), }}>
                             <Text style={{ fontSize: vs(50), color: '#36355A' }}>M</Text>
@@ -22,17 +25,17 @@ const Completed = ({ section, getEnteringAnimation }) => {
 
                         <View style={{ height: 'auto', width: '60%', justifyContent: 'space-between' }}>
 
-                                <Text style={{ fontSize: vs(16), fontWeight: '500', color: '#36355A' }}>Мое задание</Text>
+                             <Text style={{ fontSize: vs(16), fontWeight: '500', color: '#36355A' }}>Мое задание</Text>
 
-                                <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>Тестовый предмет Биология</Text>
+                            <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>Тестовый предмет Биология</Text>
 
-                                <View style={{ padding: vs(5), backgroundColor: '#F0FCEE', borderRadius: 50, justifyContent: 'center', width: '50%', alignItems: 'center'}}>
-                                    <Text style={{ fontSize: Platform.isPad ? vs(14) : vs(12), color: '#59E956', fontWeight: '500' }}>выполнено</Text>
-                                </View>
+                            <View style={{ padding: vs(5), backgroundColor: '#F0FCEE', borderRadius: 50, justifyContent: 'center', width: '50%', alignItems: 'center'}}>
+                                <Text style={{ fontSize: Platform.isPad ? vs(14) : vs(12), color: '#59E956', fontWeight: '500' }}>выполнено</Text>
+                            </View>
 
                         </View>
                     
-                    </View>
+                    </TouchableOpacity>
                 )
             })}
 
