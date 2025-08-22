@@ -19,11 +19,8 @@ const AnnouncementsScreen = () => {
             {section === 'примечания' ?  
 
                 <Remarks section={section} />
-                
             :
-
                 <Announcements section={section} />
-
             }
 
         </View>
