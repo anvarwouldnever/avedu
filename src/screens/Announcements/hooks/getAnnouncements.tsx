@@ -13,7 +13,6 @@ export const getAnnouncements = () => {
 
         const fetchAnnouncements = async () => {
             try {
-                console.log('zap announcements')
                 const response = await GetAnnouncements();
                 cachedAnnouncements = response?.data;
                 setAnnouncements(response?.data);

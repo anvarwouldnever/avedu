@@ -3,10 +3,13 @@ import React from 'react'
 import { useScale } from '../../hooks/useScale'
 import ProgressBorder from '../../components/ProgressBorder'
 import { Ionicons } from '@expo/vector-icons'
+import { getProgress } from './hooks/getProgress'
 
 const ChildStats = () => {
 
     const { s, vs } = useScale()
+
+    const { progress, loading, error } = getProgress()
 
     return (
 

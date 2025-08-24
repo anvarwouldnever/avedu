@@ -21,7 +21,7 @@ const Remarks = ({ section }) => {
                 const child = item?.client?.full_name; 
                 const teacher = item?.customer?.full_name;
                 const subject = item?.discipline?.title;         
-                const date = formatDate(item?.updated_at)
+                const date = formatDate(item?.updated_at);
 
                 return (
                     <View key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >

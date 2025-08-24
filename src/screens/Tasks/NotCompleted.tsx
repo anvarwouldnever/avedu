@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 import { useScale } from '../../hooks/useScale';
 import { useNavigation } from '@react-navigation/native';
 
-const NotCompleted = ({ section, getEnteringAnimation }) => {
+const NotCompleted = ({ section, getEnteringAnimation, notCompleted }) => {
 
     const { s, vs } = useScale()
 
@@ -13,25 +13,39 @@ const NotCompleted = ({ section, getEnteringAnimation }) => {
     return (
         <Animated.ScrollView key={section} entering={getEnteringAnimation()} showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: vs(25), padding: vs(2) }} style={{ width: '100%', height: 'auto' }}>
                     
-            {Array.from({ length: 4 }).map((item, index, arr) => {
+            {notCompleted?.map((item, index, arr) => {
                 const isLast = index === arr?.length - 1;
 
+                const title = item?.title
+                const subject = item?.lessonplan?.discipline?.title
+
+                const startDate = item?.start_at
+                const taskTitle = item?.lessonplan?.title
+                const questions = item?.questions_count
+                const isTimeLimit = item?.is_time_limit
+                const givenTime = item?.given_seconds
+                const image = item?.lessonplan?.discipline?.icon
+
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('Task')} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Task', {startDate: startDate, image: image, title: title, subject: subject, taskTitle: taskTitle, questions: questions, isTimeLimit: isTimeLimit, givenTime: givenTime, type: 'notCompleted', baseColor: '#FCEEF5', color: '#E05A9A' })} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
                         
-                        <View style={{ width: 'auto', backgroundColor: '#FCEEF5', height: '100%', paddingHorizontal: vs(20), paddingVertical: vs(10), borderRadius: vs(15), }}>
-                            <Text style={{ fontSize: vs(50), color: '#36355A' }}>M</Text>
+                        <View style={{ width: vs(85), backgroundColor: '#FCEEF5', height: '100%', paddingHorizontal: vs(20), paddingVertical: vs(10), borderRadius: vs(15), alignItems: 'center' }}>
+                            
+                            <Text style={{ fontSize: vs(50), color: '#36355A' }}>{title?.[0]?.toUpperCase() || ''}</Text>
+                        
                         </View>
 
                         <View style={{ height: 'auto', width: '60%', justifyContent: 'space-between' }}>
 
-                                <Text style={{ fontSize: vs(16), fontWeight: '500', color: '#36355A' }}>Мое задание</Text>
+                            <Text style={{ fontSize: vs(16), fontWeight: '500', color: '#36355A' }}>{title}</Text>
 
-                                <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>Тестовый предмет Биология</Text>
+                            <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>{subject}</Text>
 
-                                <View style={{ padding: vs(5), backgroundColor: '#FCEEF5', borderRadius: 50, justifyContent: 'center', width: '60%', alignItems: 'center'}}>
-                                    <Text style={{ fontSize: Platform.isPad ? vs(14) : vs(12), color: '#E05A9A', fontWeight: '500' }}>не выполнено</Text>
-                                </View>
+                            <View style={{ padding: vs(5), backgroundColor: '#FCEEF5', borderRadius: 50, justifyContent: 'center', width: '60%', alignItems: 'center'}}>
+                                
+                                <Text style={{ fontSize: Platform.isPad ? vs(14) : vs(12), color: '#E05A9A', fontWeight: '500' }}>не выполнено</Text>
+                            
+                            </View>
 
                         </View>
                     

@@ -13,7 +13,6 @@ export const getRemarks = () => {
 
         const fetchRemarks = async () => {
             try {
-                console.log('zap remarks')
                 const response = await GetRemarks();
                 cachedRemarks = response?.data;
                 setRemarks(response?.data);

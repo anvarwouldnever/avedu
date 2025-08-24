@@ -4,6 +4,7 @@ import { useScale } from '../hooks/useScale'
 import InfoContainer from './Home/InfoContainer'
 import ChildStats from './Home/ChildStats'
 import Options from './Home/Options'
+import { observer } from 'mobx-react-lite'
 
 const HomeScreen = () => {
 
@@ -22,4 +23,4 @@ const HomeScreen = () => {
     )
 }
 
-export default HomeScreen;
+export default observer(HomeScreen);

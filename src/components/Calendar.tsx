@@ -1,11 +1,28 @@
 import { View, Button, Modal } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import { useScale } from '../hooks/useScale'
 
-const Calendar = ({ birthday, onChange, cancel, done, show }) => {
+const Calendar = ({ date, show, setShow, onConfirm }) => {
 
     const { s, vs } = useScale()
+
+    const [tempDate, setTempDate] = useState<any>(date)
+
+    const onChange = (event, selectedDate?: Date) => {
+        if (selectedDate) {
+            setTempDate(selectedDate)
+        }
+    }
+
+    const done = () => {
+        onConfirm(tempDate)   // только тут фиксируем выбранное
+        setShow(false)
+    }
+
+    const cancel = () => {
+        setShow(false)
+    }
 
     return (
         <Modal visible={show} animationType='fade' transparent={true}>
@@ -13,7 +30,7 @@ const Calendar = ({ birthday, onChange, cancel, done, show }) => {
             <View style={{width: 'auto', maxWidth: 445, height: 'auto', rowGap: vs(20), alignItems: 'center', borderRadius: 20, backgroundColor: 'white', paddingHorizontal: vs(10), position: 'absolute', top: vs(250), alignSelf: 'center', flexDirection: 'column', justifyContent: 'space-between', shadowColor: 'black', shadowRadius: 400, shadowOffset: {width: 1, height: 1}, shadowOpacity: 1}}>
                 
                 <RNDateTimePicker
-                    value={birthday} 
+                    value={date} 
                     onChange={onChange}
                     themeVariant="light"
                     style={{ marginTop: 1, width: '100%', maxWidth: 420, height: 'auto', backgroundColor: 'white'}}

@@ -6,6 +6,7 @@ import Completed from './Tasks/Completed'
 import InProcess from './Tasks/InProcess'
 import NotCompleted from './Tasks/NotCompleted'
 import Sections from './Tasks/Sections'
+import { getTasks } from './Tasks/hooks/getTasks'
 
 const sections = ['Невыполненные', 'Начатые', 'Выполненные']
 
@@ -32,6 +33,24 @@ const TasksScreen = () => {
         setSection(newSection)
     }
 
+    const states =  ['', 'started', 'done']
+
+    const { tasks, loading, error } = getTasks("1477")
+
+    const notCompleted = tasks?.data.filter(
+        (task: any) => !task?.start_at && !task?.done_at
+    ) ?? [];
+      
+    const inProcess = tasks?.data?.filter(
+        (task: any) => task?.start_at && !task?.done_at
+    ) ?? [];
+      
+    const completed = tasks?.data?.filter(
+        (task: any) => task?.done_at
+    ) ?? [];
+
+    // console.log(notStarted.length, started.length, done.length)
+
     return (
         <View style={{ flex: 1, alignItems: 'center', padding: vs(20), backgroundColor: 'white', rowGap: vs(25) }}>
             
@@ -39,15 +58,15 @@ const TasksScreen = () => {
 
             { section === 'Невыполненные' ?  
 
-                <NotCompleted section={section} getEnteringAnimation={getEnteringAnimation} />
+                <NotCompleted notCompleted={notCompleted} section={section} getEnteringAnimation={getEnteringAnimation} />
 
             : section === 'Начатые' ?
 
-                <InProcess section={section} getEnteringAnimation={getEnteringAnimation} />
+                <InProcess inProcess={inProcess} section={section} getEnteringAnimation={getEnteringAnimation} />
 
             : section === 'Выполненные' ?
 
-                <Completed section={section} getEnteringAnimation={getEnteringAnimation} /> : null
+                <Completed completed={completed} section={section} getEnteringAnimation={getEnteringAnimation} /> : null
 
             }
 
