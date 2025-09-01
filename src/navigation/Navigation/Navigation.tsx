@@ -16,10 +16,11 @@ import TaskScreen from '../../screens/TaskScreen';
 import LoginScreen from '../../screens/LoginScreen';
 import ChildrenScreen from '../../screens/ChildrenScreen';
 import HeaderRight from './HeaderRight';
+import { navigationStore } from '../NavigationStore';
 
 const Stack = createStackNavigator();
 
-const Navigation = ({ openSlider } : { openSlider: () => void }) => {
+const Navigation = () => {
 
     const { s, vs } = useScale();
     const [key, setKey] = useState<boolean>(false)
@@ -39,7 +40,7 @@ const Navigation = ({ openSlider } : { openSlider: () => void }) => {
                 height: Platform.isPad? 130 : vs(130),
             },
             headerRight: () => (
-                <HeaderRight openSlider={openSlider} />
+                <HeaderRight />
             ),
             headerLeft: () => (
                 <Logo />

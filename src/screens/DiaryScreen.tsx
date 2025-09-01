@@ -4,6 +4,8 @@ import { useScale } from '../hooks/useScale'
 import Calendar from '../components/Calendar'
 import Diary from './Diary/Diary'
 import { getDiary } from './Diary/hooks/getDiary'
+import Slider from '../navigation/Slider/Slider'
+import SliderContent from '../navigation/Slider/SliderContent'
 
 const DiaryScreen = () => {
 
@@ -26,7 +28,7 @@ const DiaryScreen = () => {
     const { diary, loading, error } = getDiary(formattedDate)
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ alignItems: 'center', padding: vs(20), rowGap: vs(25)}} style={{ flex: 1, backgroundColor: 'white' }}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ alignItems: 'center', padding: vs(20), rowGap: vs(25), flex: 1 }} style={{ backgroundColor: 'white' }}>
             
             <Text style={{ fontSize: Platform.isPad ? vs(18) : vs(16) }}>Выберите дату</Text>
 
@@ -45,6 +47,10 @@ const DiaryScreen = () => {
                 <Diary diary={diary?.data} />
 
             } 
+
+            <Slider>
+                <SliderContent />
+            </Slider>
 
         </ScrollView>
     )

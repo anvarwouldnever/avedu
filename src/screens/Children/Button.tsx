@@ -38,4 +38,4 @@ const Button = ({ selectedId, children }) => {
     )
 }
 
-export default Button
+export default Button;

@@ -17,58 +17,64 @@ const menuItems = [
     { screen: 'Profile', icon: 'person-outline', label: translations[store.language].мойпрофиль },
 ];
 
-const SliderContent = observer(({ onClose } : { onClose: () => void }) => {
+const SliderContent = () => {
     const navigation = useNavigation();
-    const { s, vs } = useScale()
+    const { s, vs } = useScale();
 
     const handleNavigate = (screen: string) => {
         if (navigationStore.currentRoute !== screen) {
-            navigation.dispatch(
-                CommonActions.reset({
-                    index: 0,
-                    routes: [{ name: screen }],
-                })
-            );
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: screen }],
+            })
+          );
         };
-
-        onClose();
+        navigationStore.setOpenSlider(false)
     };
   
     return (
-        <View style={{ padding: Platform.isPad? vs(14) : s(14), backgroundColor: '#FFFFFF'}}>
-            {menuItems.map((item) => {
-                const isActive = navigationStore?.currentRoute === item?.screen;
-
-                return (
-                    <Pressable key={item?.screen} onPress={() => handleNavigate(item?.screen)} style={[ styles.item, isActive && styles.itemActive, {marginBottom: Platform.isPad? vs(20) : s(20), padding: Platform.isPad? vs(14) : s(14)}]}>
-
-                        <Ionicons name={item.icon as any} size={vs(20)} color={isActive ? '#FFFFFF' : '#9087E5'} />
-                        
-                        <Text style={[styles.text, { color: isActive ? '#FFFFFF' : '#9087E5', fontSize: Platform.isPad? vs(16) : s(16), marginLeft: Platform.isPad? vs(15) : s(15), fontWeight: '500'}]}>
-                            {item.label}
-                        </Text>
-
-                    </Pressable>
-                );
-            })}
-        </View>
+      <View style={{ padding: vs(14), backgroundColor: '#FFFFFF', width: '100%', borderRadius: 30}}>
+        {menuItems.map((item) => {
+          const isActive = navigationStore.currentRoute === item.screen;
+          return (
+            <Pressable
+              key={item.screen}
+              onPress={() => handleNavigate(item.screen)}
+              style={[
+                styles.item,
+                isActive && styles.itemActive,
+                {marginBottom: Platform.isPad? vs(20) : s(20), padding: Platform.isPad? vs(14) : s(14),}
+              ]}
+            >
+            <Ionicons
+                name={item.icon as any}
+                size={vs(20)}
+                color={isActive ? '#FFFFFF' : '#B390EF'}
+            />
+            <Text style={[styles.text, { color: isActive ? '#FFFFFF' : '#B390EF', fontSize: Platform.isPad? vs(16) : s(16), marginLeft: Platform.isPad? vs(15) : s(15)}]}>
+                {item?.label}
+            </Text>
+            </Pressable>
+          );
+        })}
+      </View>
     );
-});
+  };
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     item: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderRadius: 16,
     },
     itemActive: {
-        backgroundColor: '#9087E5',
+      backgroundColor: '#B390EF',
     },
     text: {
-        flexShrink: 1,
-        fontWeight: '600',
+      flexShrink: 1,
+      fontWeight: '600',
     },
-});
-  
+  });
 
-export default SliderContent;
+export default observer(SliderContent);

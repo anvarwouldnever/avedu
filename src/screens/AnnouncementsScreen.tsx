@@ -4,12 +4,14 @@ import { useScale } from '../hooks/useScale'
 import Sections from './Announcements/Sections';
 import Remarks from './Announcements/Remarks';
 import Announcements from './Announcements/Announcements';
+import Slider from '../navigation/Slider/Slider';
+import SliderContent from '../navigation/Slider/SliderContent';
 
 const AnnouncementsScreen = () => {
 
     const { s, vs } = useScale();
 
-    const [section, setSection] = useState<string>('примечания')
+    const [section, setSection] = useState<string>('примечания');
 
     return (
         <View style={{ flex: 1, alignItems: 'center', padding: vs(20), backgroundColor: 'white', rowGap: vs(25) }}>
@@ -22,6 +24,10 @@ const AnnouncementsScreen = () => {
             :
                 <Announcements section={section} />
             }
+
+            <Slider>
+                <SliderContent />
+            </Slider>
 
         </View>
     )

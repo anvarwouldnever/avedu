@@ -4,6 +4,8 @@ import { useScale } from '../hooks/useScale'
 import Calendar from '../components/Calendar'
 import Schedule from './Schedule/Schedule'
 import { getSchedule } from './Schedule/hooks/getSchedule'
+import Slider from '../navigation/Slider/Slider'
+import SliderContent from '../navigation/Slider/SliderContent'
 
 const ScheduleScreen = () => {
 
@@ -26,7 +28,7 @@ const ScheduleScreen = () => {
     const { schedule, loading, error } = getSchedule(formattedDate)
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ alignItems: 'center', padding: vs(20), rowGap: vs(25)}} style={{ flex: 1, backgroundColor: 'white' }}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ alignItems: 'center', padding: vs(20), rowGap: vs(25), flex: 1 }} style={{ backgroundColor: 'white' }}>
             
             <Text style={{ fontSize: Platform.isPad ? vs(18) : vs(16), color: '#0C092A' }}>Выберите дату</Text>
 
@@ -37,6 +39,10 @@ const ScheduleScreen = () => {
             </View>
 
             <Schedule schedule={schedule?.data} />
+
+            <Slider>
+                <SliderContent />
+            </Slider>
 
         </ScrollView>
     )

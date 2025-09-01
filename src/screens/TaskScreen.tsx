@@ -4,6 +4,8 @@ import { useScale } from '../hooks/useScale'
 import Back from './Task/Back'
 import Task from './Task/Task'
 import Status from './Task/Status'
+import Slider from '../navigation/Slider/Slider'
+import SliderContent from '../navigation/Slider/SliderContent'
 
 const TaskScreen = ({ route }) => {
 
@@ -22,13 +24,17 @@ const TaskScreen = ({ route }) => {
     const image = route?.params?.image;
 
     return (
-        <ScrollView contentContainerStyle={{ padding: vs(20), backgroundColor: 'white', rowGap: vs(20) }} style={{ flex: 1, backgroundColor: 'white' }}>
+        <ScrollView contentContainerStyle={{ padding: vs(20), backgroundColor: 'white', rowGap: vs(20), flex: 1 }} style={{ backgroundColor: 'white' }}>
             
             <Back />
             
             <Task startDate={startDate} title={title} image={image} taskTitle={taskTitle} subject={subject} isTimeLimit={isTimeLimit} givenTime={givenTime} baseColor={baseColor} color={color} />
 
             <Status type={type} questions={questions} />
+
+            <Slider>
+                <SliderContent />
+            </Slider>
 
         </ScrollView>
     )

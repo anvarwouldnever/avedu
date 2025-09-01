@@ -1,9 +1,10 @@
-import { View, Text, TextInput } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { withTiming } from 'react-native-reanimated'
 import { useScale } from '../../hooks/useScale'
+import { putProfile } from './hooks/putProfile'
 
-const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFatherName, defaultPhone, defaultAddress, profile }) => {
+const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFatherName, defaultPhone, defaultAddress, profile, birthday, gender, email, fullAddress }) => {
 
     const { s, vs } = useScale()
 
@@ -13,6 +14,16 @@ const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFa
     const [phone, setPhone] = useState<string>();
     const [address, setAddress] = useState<string>();
 
+    const [showSaveButton, setShowSaveButton] = useState<boolean>(false);
+
+    const defaultsRef = useRef({
+        firstName: defaultFirstName,
+        lastName: defaultLastName,
+        fatherName: defaultFatherName,
+        phone: defaultPhone,
+        address: defaultAddress
+    });
+
     useEffect(() => {
         if (profile) {
             setFirstName(defaultFirstName);
@@ -20,8 +31,38 @@ const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFa
             setFatherName(defaultFatherName);
             setPhone(defaultPhone);
             setAddress(defaultAddress);
+        
+            defaultsRef.current = {
+                firstName: defaultFirstName,
+                lastName: defaultLastName,
+                fatherName: defaultFatherName,
+                phone: defaultPhone,
+                address: defaultAddress
+            };
+      
+            setShowSaveButton(false);
         }
     }, [profile]);
+
+    useEffect(() => {
+        const hasChanges = firstName !== defaultsRef.current.firstName || lastName !== defaultsRef.current.lastName || fatherName !== defaultsRef.current.fatherName || phone !== defaultsRef.current.phone || address !== defaultsRef.current.address;
+        const allFilled = firstName?.trim() && lastName?.trim() && fatherName?.trim() && phone?.trim() && address?.trim();
+        setShowSaveButton(hasChanges && !!allFilled);
+    }, [firstName, lastName, fatherName, phone, address]);
+
+    const { updateProfile, loading, error } = putProfile()
+
+    const handleSave = async() => {
+        try {
+            await updateProfile(firstName, lastName, fatherName, gender, birthday, email, { title: fullAddress?.title, address })
+            console.log("✅ Профиль обновлён");
+
+            defaultsRef.current = { firstName, lastName, fatherName, phone, address };
+            setShowSaveButton(false);           
+        } catch (e) {
+            console.log("❌ Ошибка при обновлении");
+        }
+    };
 
     return (
         <View style={{ width: '100%', height: 'auto', padding: vs(15), rowGap: vs(15), flexDirection: 'column', columnGap: vs(15), backgroundColor: 'white', borderRadius: vs(20), shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }}>
@@ -32,19 +73,19 @@ const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFa
                 value={firstName}
                 onChangeText={(text) => setFirstName(text)}
                 placeholder='Фамилия'
-                style={[{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: '#EFEEFC' }]}
+                style={[{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: firstName === ''? '#E05A9A' : '#EFEEFC' }]}
             />
 
             <TextInput 
                 value={lastName}
                 onChangeText={(text) => setLastName(text)}
                 placeholder='Имя'
-                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: '#EFEEFC' }}
+                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: lastName === ''? '#E05A9A' : '#EFEEFC' }}
                 onFocus={() => {
-                    translateY.value = withTiming(-50, { duration: 300 }) // вверх на 150px
+                    translateY.value = withTiming(-50, { duration: 300 })
                 }}
                 onBlur={() => {
-                    translateY.value = withTiming(0, { duration: 300 }) // назад вниз
+                    translateY.value = withTiming(0, { duration: 300 })
                 }}
             />
 
@@ -52,12 +93,12 @@ const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFa
                 value={fatherName}
                 onChangeText={(text) => setFatherName(text)}
                 placeholder='Отчество'
-                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: '#EFEEFC' }}
+                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: fatherName === ''? '#E05A9A' : '#EFEEFC' }}
                 onFocus={() => {
-                    translateY.value = withTiming(-130, { duration: 300 }) // вверх на 150px
+                    translateY.value = withTiming(-130, { duration: 300 })
                 }}
                 onBlur={() => {
-                    translateY.value = withTiming(0, { duration: 300 }) // назад вниз
+                    translateY.value = withTiming(0, { duration: 300 })
                 }}
             />
 
@@ -67,12 +108,12 @@ const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFa
                 value={phone} 
                 onChangeText={(text) => setPhone(text)}
                 placeholder='Номер телефона'
-                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: '#EFEEFC' }}
+                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: phone === ''? '#E05A9A' : '#EFEEFC' }}
                 onFocus={() => {
-                    translateY.value = withTiming(-235, { duration: 300 }) // вверх на 150px
+                    translateY.value = withTiming(-235, { duration: 300 })
                 }}
                 onBlur={() => {
-                    translateY.value = withTiming(0, { duration: 300 }) // назад вниз
+                    translateY.value = withTiming(0, { duration: 300 })
                 }}
             />
 
@@ -80,14 +121,23 @@ const PersonalInfo = ({ translateY, defaultFirstName, defaultLastName, defaultFa
                 value={address}
                 onChangeText={(text) => setAddress(text)}
                 placeholder='Адрес проживания'
-                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: '#EFEEFC' }}
+                style={{ width: '100%', fontSize: vs(14), borderWidth: 1, padding: vs(15), borderRadius: vs(20), borderColor: address === ''? '#E05A9A' : '#EFEEFC' }}
                 onFocus={() => {
-                    translateY.value = withTiming(-235, { duration: 300 }) // вверх на 150px
+                    translateY.value = withTiming(-255, { duration: 300 })
                 }}
                 onBlur={() => {
-                    translateY.value = withTiming(0, { duration: 300 }) // назад вниз
+                    translateY.value = withTiming(0, { duration: 300 })
                 }}
             />
+
+            { showSaveButton && 
+                <TouchableOpacity onPress={() => handleSave()} style={{ justifyContent: 'center', alignItems: 'center', alignSelf: 'center', height: vs(46), backgroundColor: '#6A5AE0', borderRadius: vs(15), width: '47%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7 }}>
+                    { loading ?
+                        <ActivityIndicator color={'white'} size={'small'} />
+                    :
+                        <Text style={{ fontSize: vs(14), fontWeight: '500', color: 'white' }}>Сохранить</Text>}
+                </TouchableOpacity>
+            }
 
         </View>
     )

@@ -19,7 +19,7 @@ const Buttons = () => {
     }
 
     return (
-        <View style={{ width: '100%', height: 'auto', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ width: '100%', height: 'auto', flexDirection: 'row', justifyContent: 'space-between', marginBottom: vs(50) }}>
                         
             <TouchableOpacity onPress={() => logout()} style={{ justifyContent: 'center', alignItems: 'center', height: vs(46), backgroundColor: 'white', borderRadius: vs(15), width: '47%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7 }}>
                 <Text style={{ fontSize: vs(14), fontWeight: '500', color: '#E05A9A' }}>Выйти из аккаунта</Text>

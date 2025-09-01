@@ -4,8 +4,6 @@ import WithSliderWrapper from './src/navigation/Navigation/WithSliderWrapper';
 
 const App = () => {
 
-
-
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
 

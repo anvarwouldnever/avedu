@@ -13,7 +13,7 @@ export const getDiary = (date: string) => {
                 const response = await GetDiary(date)
                 setDiary(response?.data)
             } catch (e) {
-                console.log(e)
+                console.log(e?.response?.data)
                 setError(e?.response?.data?.message || 'Ошибка загрузки аккаунта');
             } finally {
                 setLoading(false);

@@ -13,7 +13,7 @@ export const getSchedule = (date: string) => {
                 const response = await GetSchedule(date)
                 setschedule(response?.data)
             } catch (e) {
-                console.log(e)
+                console.log(e?.response?.data)
                 setError(e?.response?.data?.message || 'Ошибка загрузки расписания');
             } finally {
                 setLoading(false);

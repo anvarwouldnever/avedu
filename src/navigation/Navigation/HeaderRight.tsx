@@ -3,8 +3,9 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { useScale } from '../../hooks/useScale'
 import { useNavigation } from '@react-navigation/native'
+import { navigationStore } from '../NavigationStore'
 
-const HeaderRight = ({ openSlider }) => {
+const HeaderRight = () => {
 
     const { s, vs } = useScale()
 
@@ -46,7 +47,7 @@ const HeaderRight = ({ openSlider }) => {
                 />
             </TouchableOpacity> 
 
-            <TouchableOpacity onPress={() => openSlider()}>
+            <TouchableOpacity onPress={() => navigationStore.setOpenSlider(!navigationStore.openSlider)}>
                 <Ionicons name="menu" size={vs(50)} color="black" />
             </TouchableOpacity>
 

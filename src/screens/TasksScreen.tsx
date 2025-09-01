@@ -7,6 +7,8 @@ import InProcess from './Tasks/InProcess'
 import NotCompleted from './Tasks/NotCompleted'
 import Sections from './Tasks/Sections'
 import { getTasks } from './Tasks/hooks/getTasks'
+import Slider from '../navigation/Slider/Slider'
+import SliderContent from '../navigation/Slider/SliderContent'
 
 const sections = ['Невыполненные', 'Начатые', 'Выполненные']
 
@@ -69,6 +71,10 @@ const TasksScreen = () => {
                 <Completed completed={completed} section={section} getEnteringAnimation={getEnteringAnimation} /> : null
 
             }
+
+            <Slider>
+                <SliderContent />
+            </Slider>
 
         </View>
     )
