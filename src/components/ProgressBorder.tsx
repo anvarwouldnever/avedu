@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, { useSharedValue, useAnimatedProps, withTiming } from 'react-native-reanimated';
 import { useScale } from '../hooks/useScale';
@@ -15,7 +15,7 @@ const ProgressBorder = ({
     baseColor = '#EFEEFC',
     duration = 1500
 }) => {
-    const { vs } = useScale();
+    const { vs, isTablet } = useScale();
 
     const radius = ((size - 2) - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
@@ -86,7 +86,7 @@ const ProgressBorder = ({
                 alignItems: 'center'
             }}>
 
-                <Text style={{ color: color, fontSize: Platform.isPad ? vs(22) : vs(20), fontWeight: 'bold' }}>
+                <Text style={{ color: color, fontSize: isTablet ? vs(22) : vs(20), fontWeight: 'bold' }}>
                     {`${percent}%`}
                 </Text>
 

@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import React from 'react'
 import { useScale } from '../hooks/useScale'
 import Back from './Task/Back'
@@ -6,10 +6,13 @@ import Task from './Task/Task'
 import Status from './Task/Status'
 import Slider from '../navigation/Slider/Slider'
 import SliderContent from '../navigation/Slider/SliderContent'
+import useLock from '../hooks/useLock'
 
 const TaskScreen = ({ route }) => {
 
     const { s, vs } = useScale()
+
+    useLock()
 
     const startDate = route?.params?.startDate;
     const title = route?.params?.title;
@@ -24,19 +27,23 @@ const TaskScreen = ({ route }) => {
     const image = route?.params?.image;
 
     return (
-        <ScrollView contentContainerStyle={{ padding: vs(20), backgroundColor: 'white', rowGap: vs(20), flex: 1 }} style={{ backgroundColor: 'white' }}>
+        <View style={{ flex: 1 }}>
             
-            <Back />
+            <ScrollView contentContainerStyle={{ padding: vs(20), backgroundColor: 'white', rowGap: vs(20), flex: 1 }} style={{ backgroundColor: 'white' }}>
             
-            <Task startDate={startDate} title={title} image={image} taskTitle={taskTitle} subject={subject} isTimeLimit={isTimeLimit} givenTime={givenTime} baseColor={baseColor} color={color} />
+                <Back />
+                
+                <Task startDate={startDate} title={title} image={image} taskTitle={taskTitle} subject={subject} isTimeLimit={isTimeLimit} givenTime={givenTime} baseColor={baseColor} color={color} />
 
-            <Status type={type} questions={questions} />
+                <Status type={type} questions={questions} />
+
+            </ScrollView>
 
             <Slider>
                 <SliderContent />
             </Slider>
 
-        </ScrollView>
+        </View>
     )
 }
 

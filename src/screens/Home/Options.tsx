@@ -1,4 +1,4 @@
-import { View, Text, Platform, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useScale } from '../../hooks/useScale'
 import { Image } from 'expo-image'
@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 
 const Options = () => {
 
-    const { s, vs } = useScale()
+    const { s, vs, isTablet } = useScale()
 
     const navigation = useNavigation()
 
@@ -17,7 +17,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: Platform.isPad ? vs(16) : vs(14), fontWeight: '600' }}>Примечания</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Примечания</Text>
 
             </TouchableOpacity>
 
@@ -25,7 +25,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: Platform.isPad ? vs(16) : vs(14), fontWeight: '600' }}>Задания</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Задания</Text>
 
             </TouchableOpacity>
 
@@ -33,7 +33,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: Platform.isPad ? vs(16) : vs(14), fontWeight: '600' }}>Дневник ребенка</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Дневник ребенка</Text>
 
             </TouchableOpacity>
 
@@ -41,7 +41,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: Platform.isPad ? vs(16) : vs(14), fontWeight: '600' }}>Расписание уроков</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Расписание уроков</Text>
 
             </TouchableOpacity>
 

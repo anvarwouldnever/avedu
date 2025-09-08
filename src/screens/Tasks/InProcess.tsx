@@ -1,12 +1,12 @@
-import { View, Text, Platform, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, Platform, TouchableOpacity } from 'react-native'
 import React from 'react'
-import Animated, { FadeInRight } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useScale } from '../../hooks/useScale';
 import { useNavigation } from '@react-navigation/native';
 
 const InProcess = ({ section, getEnteringAnimation, inProcess }) => {
 
-    const { s, vs } = useScale()
+    const { s, vs, isTablet } = useScale()
 
     const navigation = useNavigation()
 
@@ -27,7 +27,7 @@ const InProcess = ({ section, getEnteringAnimation, inProcess }) => {
                 const image = item?.lessonplan?.discipline?.icon
 
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('Task', {startDate: startDate, image: image, title: title, subject: subject, taskTitle: taskTitle, questions: questions, isTimeLimit: isTimeLimit, givenTime: givenTime, type: 'inProcess', baseColor: '#EFEEFC', color: '#6A5AE0' })} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Task', {startDate: startDate, image: image, title: title, subject: subject, taskTitle: taskTitle, questions: questions, isTimeLimit: isTimeLimit, givenTime: givenTime, type: 'inProcess', baseColor: '#EFEEFC', color: '#6A5AE0' })} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: isTablet ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
                         
                         <View style={{ width: vs(85), backgroundColor: '#EFEEFC', height: '100%', paddingHorizontal: vs(20), paddingVertical: vs(10), borderRadius: vs(15), alignItems: 'center' }}>
                             <Text style={{ fontSize: vs(50), color: '#36355A' }}>{title?.[0]?.toUpperCase() || ''}</Text>
@@ -40,7 +40,7 @@ const InProcess = ({ section, getEnteringAnimation, inProcess }) => {
                                 <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>{subject}</Text>
 
                                 <View style={{ padding: vs(5), backgroundColor: '#EFEEFC', borderRadius: 50, justifyContent: 'center', width: '50%', alignItems: 'center'}}>
-                                    <Text style={{ fontSize: Platform.isPad ? vs(14) : vs(12), color: '#6A5AE0', fontWeight: '500' }}>в процессе</Text>
+                                    <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#6A5AE0', fontWeight: '500' }}>в процессе</Text>
                                 </View>
 
                         </View>

@@ -1,4 +1,4 @@
-import { View, Text, Platform, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Animated from 'react-native-reanimated';
 import { useScale } from '../../hooks/useScale';
@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const NotCompleted = ({ section, getEnteringAnimation, notCompleted }) => {
 
-    const { s, vs } = useScale()
+    const { s, vs, isTablet } = useScale()
 
     const navigation = useNavigation()
 
@@ -27,7 +27,7 @@ const NotCompleted = ({ section, getEnteringAnimation, notCompleted }) => {
                 const image = item?.lessonplan?.discipline?.icon
 
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('Task', {startDate: startDate, image: image, title: title, subject: subject, taskTitle: taskTitle, questions: questions, isTimeLimit: isTimeLimit, givenTime: givenTime, type: 'notCompleted', baseColor: '#FCEEF5', color: '#E05A9A' })} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: Platform.isPad ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Task', {startDate: startDate, image: image, title: title, subject: subject, taskTitle: taskTitle, questions: questions, isTimeLimit: isTimeLimit, givenTime: givenTime, type: 'notCompleted', baseColor: '#FCEEF5', color: '#E05A9A' })} key={index} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'flex-start', gap: vs(15), padding: isTablet ? vs(14) : vs(12), marginBottom: isLast ? vs(50) : 0, borderRadius: vs(20), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
                         
                         <View style={{ width: vs(85), backgroundColor: '#FCEEF5', height: '100%', paddingHorizontal: vs(20), paddingVertical: vs(10), borderRadius: vs(15), alignItems: 'center' }}>
                             
@@ -43,7 +43,7 @@ const NotCompleted = ({ section, getEnteringAnimation, notCompleted }) => {
 
                             <View style={{ padding: vs(5), backgroundColor: '#FCEEF5', borderRadius: 50, justifyContent: 'center', width: '60%', alignItems: 'center'}}>
                                 
-                                <Text style={{ fontSize: Platform.isPad ? vs(14) : vs(12), color: '#E05A9A', fontWeight: '500' }}>не выполнено</Text>
+                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#E05A9A', fontWeight: '500' }}>не выполнено</Text>
                             
                             </View>
 

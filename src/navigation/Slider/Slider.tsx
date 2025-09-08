@@ -5,7 +5,6 @@ import {
   Text,
   Pressable,
   Platform,
-  useWindowDimensions,
 } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -24,7 +23,7 @@ const Slider = ({
 
   const { s, vs, windowWidth } = useScale()
 
-  const SLIDER_WIDTH = Platform.isPad? windowWidth * 0.3 : windowWidth * 0.75;
+  const SLIDER_WIDTH = Platform.isPad? windowWidth * 0.5 : windowWidth * 0.75;
 
   const translateX = useSharedValue(-SLIDER_WIDTH);
 

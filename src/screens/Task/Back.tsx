@@ -1,4 +1,4 @@
-import {  Text, Platform, TouchableOpacity } from 'react-native'
+import {  Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -6,7 +6,7 @@ import { useScale } from '../../hooks/useScale'
 
 const Back = () => {
 
-    const { s, vs } = useScale();
+    const { s, vs, isTablet } = useScale();
 
     const navigation = useNavigation()
 
@@ -15,7 +15,7 @@ const Back = () => {
                 
             <Ionicons name='chevron-back' color={'#6A5AE0'} size={vs(20)} style={{ marginLeft: -vs(6) }} />
             
-            <Text style={{ fontSize: Platform.isPad? vs(18) : vs(16), fontWeight: '500', color: '#6A5AE0'  }}>Назад</Text>
+            <Text style={{ fontSize: isTablet? vs(18) : vs(16), fontWeight: '500', color: '#6A5AE0'  }}>Назад</Text>
 
         </TouchableOpacity>
     )

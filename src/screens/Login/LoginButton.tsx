@@ -1,16 +1,14 @@
-import { Text, TouchableOpacity, Platform, ActivityIndicator } from 'react-native'
+import { Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useScale } from '../../hooks/useScale'
 import * as SecureStore from 'expo-secure-store';
-import translations from '../../../translations'
-import { store } from '../../store/store'
 import { Login } from '../../api/methods/login/login';
 
 const LoginButton = ({ phone, password, setErrorMessage, setThinking, thinking }) => {
 
     const navigation = useNavigation();
-    const { s, vs } = useScale();
+    const { s, vs, isTablet } = useScale();
 
     const login = async() => {
 
@@ -51,12 +49,12 @@ const LoginButton = ({ phone, password, setErrorMessage, setThinking, thinking }
     }
 
     return (
-        <TouchableOpacity onPress={(!phone || !password ) ? () => {} : () => login()} style={{ width: '100%', height: Platform.isPad? vs(45) : s(45), opacity: !phone || !password ? 0.5 : 1, backgroundColor: '#6A5AE0', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={(!phone || !password ) ? () => {} : () => login()} style={{ width: '100%', height: isTablet? vs(45) : s(45), opacity: !phone || !password ? 0.5 : 1, backgroundColor: '#6A5AE0', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
             
             {thinking ? (
                 <ActivityIndicator size="small" color="#fff" />
             ) : (
-                <Text style={{ color: 'white', fontWeight: '600', fontSize: Platform.isPad? vs(16) : vs(14) }}>Войти</Text>
+                <Text style={{ color: 'white', fontWeight: '600', fontSize: isTablet? vs(16) : vs(14) }}>Войти</Text>
             )}
             
         </TouchableOpacity>

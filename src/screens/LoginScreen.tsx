@@ -1,15 +1,17 @@
 import { View, Text, SafeAreaView } from 'react-native'
-import React, { useCallback, useState } from 'react'
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react'
 import { useScale } from '../hooks/useScale';
-import { store } from '../store/store';
 import ChooseLanguage from './Login/ChooseLanguage';
 import Inputs from './Login/Inputs';
 import LoginButton from './Login/LoginButton';
+import useLock from '../hooks/useLock';
 
 const LoginScreen = () => {
 
     const { s, vs } = useScale()
+
+    useLock()
+
     const [phone, setPhone] = useState<string>('+998 ');
     const [password, setPassword] = useState<string>(null);
     const [errorMessage, setErrorMessage] = useState<string>(null);

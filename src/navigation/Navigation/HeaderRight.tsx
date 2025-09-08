@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { useScale } from '../../hooks/useScale'
 import { useNavigation } from '@react-navigation/native'
 import { navigationStore } from '../NavigationStore'
+import { observer } from 'mobx-react-lite'
 
 const HeaderRight = () => {
 
@@ -48,11 +49,11 @@ const HeaderRight = () => {
             </TouchableOpacity> 
 
             <TouchableOpacity onPress={() => navigationStore.setOpenSlider(!navigationStore.openSlider)}>
-                <Ionicons name="menu" size={vs(50)} color="black" />
+                <Ionicons name={navigationStore.openSlider ? 'close' : 'menu'} size={vs(50)} color="black" />
             </TouchableOpacity>
 
         </View>
     )
 }
 
-export default HeaderRight
+export default observer(HeaderRight)

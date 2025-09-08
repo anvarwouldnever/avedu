@@ -9,12 +9,15 @@ import Sections from './Tasks/Sections'
 import { getTasks } from './Tasks/hooks/getTasks'
 import Slider from '../navigation/Slider/Slider'
 import SliderContent from '../navigation/Slider/SliderContent'
+import useLock from '../hooks/useLock'
 
 const sections = ['Невыполненные', 'Начатые', 'Выполненные']
 
 const TasksScreen = () => {
 
     const { vs } = useScale()
+
+    useLock()
 
     const [section, setSection] = useState<string>('Невыполненные')
     const [prevSection, setPrevSection] = useState<string>('Невыполненные')
@@ -37,7 +40,7 @@ const TasksScreen = () => {
 
     const states =  ['', 'started', 'done']
 
-    const { tasks, loading, error } = getTasks("1477")
+    const { tasks, loading, error } = getTasks()
 
     const notCompleted = tasks?.data.filter(
         (task: any) => !task?.start_at && !task?.done_at

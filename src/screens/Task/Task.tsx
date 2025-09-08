@@ -1,4 +1,4 @@
-import { View, Text, Platform } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import { useScale } from '../../hooks/useScale';
 import { Image } from 'expo-image';
@@ -6,10 +6,10 @@ import { isValidImage } from '../../utils/imageValidator';
 
 const Task = ({ startDate, title, taskTitle, subject, isTimeLimit, givenTime, baseColor, color, image }) => {
 
-    const { s, vs } = useScale()
+    const { s, vs, isTablet } = useScale()
 
     return (
-        <View style={{ backgroundColor: 'white', paddingBottom: vs(60), alignItems: 'center', flexDirection: 'column', padding: Platform.isPad ? vs(14) : vs(12), borderRadius: vs(10), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
+        <View style={{ backgroundColor: 'white', paddingBottom: vs(60), alignItems: 'center', flexDirection: 'column', padding: isTablet ? vs(14) : vs(12), borderRadius: vs(10), width: '100%', shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7, }} >
                     
             <View style={{ flexDirection: 'row', justifyContent: 'center', gap: vs(15), height: 'auto', alignItems: 'center', alignSelf: 'flex-start' }}>
 
@@ -26,18 +26,18 @@ const Task = ({ startDate, title, taskTitle, subject, isTimeLimit, givenTime, ba
         
                 <View style={{ height: 'auto', width: '65%', justifyContent: 'space-between', rowGap: vs(10) }}>
         
-                    <Text style={{ fontSize: Platform.isPad? vs(18) : vs(16), fontWeight: '500', color: '#36355A' }}>{title}</Text>
+                    <Text style={{ fontSize: isTablet? vs(18) : vs(16), fontWeight: '500', color: '#36355A' }}>{title}</Text>
         
-                    <Text style={{ fontSize: Platform.isPad? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>{subject}</Text>
+                    <Text style={{ fontSize: isTablet? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>{subject}</Text>
 
-                    <Text style={{ fontSize: Platform.isPad? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>{taskTitle}</Text>
+                    <Text style={{ fontSize: isTablet? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>{taskTitle}</Text>
         
                     <View style={{ flexDirection: 'row', gap: vs(5), alignItems: 'center' }}>
 
-                        <Text style={{ fontSize: Platform.isPad? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>Дата начала:</Text>
+                        <Text style={{ fontSize: isTablet? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>Дата начала:</Text>
 
                         <View style={{ padding: vs(5), backgroundColor: baseColor, justifyContent: 'center', width: '60%', alignItems: 'center', borderRadius: 5 }}>
-                            <Text style={{ fontSize: Platform.isPad ? vs(12) : vs(10), color: color, fontWeight: '500', lineHeight: 20, textAlign: 'center' }}>{startDate ?? 'Неизвестно'}</Text>
+                            <Text style={{ fontSize: isTablet ? vs(12) : vs(10), color: color, fontWeight: '500', lineHeight: 20, textAlign: 'center' }}>{startDate ?? 'Неизвестно'}</Text>
                         </View>
 
                     </View>
@@ -47,7 +47,7 @@ const Task = ({ startDate, title, taskTitle, subject, isTimeLimit, givenTime, ba
             </View>  
 
             <View style={{ position: 'absolute', width: '80%', height: 'auto', bottom: 0, alignSelf: 'center', backgroundColor: baseColor, paddingVertical: vs(5), borderTopRightRadius: 10, borderTopLeftRadius: 10 }}>
-                <Text numberOfLines={1} style={{ fontSize: Platform.isPad? vs(14) : vs(12), color: color, fontWeight: '500', textAlign: 'center' }}>Время на решение: {isTimeLimit ? givenTime : 'не установлено'}</Text>
+                <Text numberOfLines={1} style={{ fontSize: isTablet? vs(14) : vs(12), color: color, fontWeight: '500', textAlign: 'center' }}>Время на решение: {isTimeLimit ? givenTime : 'не установлено'}</Text>
             </View>
                         
         </View>

@@ -7,10 +7,14 @@ import Buttons from './Profile/Buttons'
 import { getProfile } from './Profile/hooks/getProfile'
 import Slider from '../navigation/Slider/Slider'
 import SliderContent from '../navigation/Slider/SliderContent'
+import { View } from 'react-native'
+import useLock from '../hooks/useLock'
 
 const ProfileScreen = () => {
 
     const { s, vs } = useScale();
+
+    useLock()
 
     const translateY = useSharedValue<number>(0);
 
@@ -37,19 +41,20 @@ const ProfileScreen = () => {
     const address = { address: profile?.address?.address, title: profile?.address?.title }
 
     return (
-        <Animated.ScrollView contentContainerStyle={{ alignItems: 'center', rowGap: vs(25), padding: vs(20), flex: 1 }} style={[ animatedUp, { backgroundColor: 'white' }]}>
+        <View style={{ flex: 1 }}>
+            <Animated.ScrollView contentContainerStyle={{ alignItems: 'center', rowGap: vs(25), padding: vs(20), flex: 1 }} style={[ animatedUp, { backgroundColor: 'white' }]}>
             
-            <MainInfo name={name} birthday={birthday} children={children} />
+                <MainInfo name={name} birthday={birthday} children={children} />
 
-            <PersonalInfo gender={gender} birthday={birthday} email={email} profile={profile} translateY={translateY} defaultFirstName={firstName} defaultLastName={lastName} defaultFatherName={fatherName} defaultPhone={phone} defaultAddress={address?.address} fullAddress={address} />
+                <PersonalInfo gender={gender} birthday={birthday} email={email} profile={profile} translateY={translateY} defaultFirstName={firstName} defaultLastName={lastName} defaultFatherName={fatherName} defaultPhone={phone} defaultAddress={address?.address} fullAddress={address} />
 
-            <Buttons />
+                <Buttons />
 
+            </Animated.ScrollView>
             <Slider>
                 <SliderContent />
             </Slider>
-
-        </Animated.ScrollView>
+        </View>
     )
 }
 

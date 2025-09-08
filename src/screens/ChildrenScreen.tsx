@@ -1,13 +1,16 @@
-import { View, Text, Platform, ScrollView } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { useScale } from '../hooks/useScale'
 import { getChildren } from './Children/hooks/getChildren'
 import Children from './Children/Children'
 import Button from './Children/Button'
+import useLock from '../hooks/useLock'
 
 const ChildrenScreen = () => {
 
-    const { s, vs } = useScale()
+    const { s, vs, isTablet } = useScale()
+
+    useLock()
 
     const { children, loading, error } = getChildren()
 
@@ -18,7 +21,7 @@ const ChildrenScreen = () => {
             
             <View style={{ height: 'auto', borderRadius: vs(10), width: '100%', padding: vs(20), backgroundColor: 'white', rowGap: vs(30), alignSelf: 'center', position: 'absolute' }}>
                 
-                <Text style={{ fontSize: Platform.isPad ? vs(16) : vs(14), fontWeight: '600' }}>Выберите ребенка:</Text>
+                <Text style={{ fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Выберите ребенка:</Text>
 
                 {children && <Children children={children} selectedId={selectedId} setSelectedId={setSelectedId} />}
 
