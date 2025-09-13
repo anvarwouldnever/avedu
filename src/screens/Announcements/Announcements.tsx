@@ -4,6 +4,7 @@ import { useScale } from '../../hooks/useScale'
 import Animated, { FadeInRight } from 'react-native-reanimated'
 import { getAnnouncements } from './hooks/getAnnouncements'
 import { formatDate } from './utils/formatDate'
+import { store } from '../../store/store'
 
 const Announcements = ({ section  }) => {
 
@@ -28,7 +29,7 @@ const Announcements = ({ section  }) => {
 
                             <View style={{ width: '100%', height: 'auto', alignItems: 'center', flexDirection: 'row' }}>
                                 
-                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), fontWeight: '600', color: '#333333' }}>Учитель: </Text>
+                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), fontWeight: '600', color: '#333333' }}>{store.text?.teacher_} </Text>
                                 
                                 <Text ellipsizeMode='tail'  style={{ fontSize: isTablet ? vs(14) : vs(12), fontWeight: '400', color: '#333333' }}>{teacher}</Text>
                                 

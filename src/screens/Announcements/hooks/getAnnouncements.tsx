@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GetAnnouncements } from '../../../api/methods/announcements/announcements';
+import { alertHandler } from '../../../utils/alertHandler';
+import { checkNetwork } from '../../../utils/checkNetwork';
 
 let cachedAnnouncements: any = null;
 
@@ -13,6 +15,8 @@ export const getAnnouncements = () => {
 
         const fetchAnnouncements = async () => {
             try {
+                const network = await checkNetwork()
+                if (!network) { alertHandler(); return; }
                 const response = await GetAnnouncements();
                 cachedAnnouncements = response?.data;
                 setAnnouncements(response?.data);

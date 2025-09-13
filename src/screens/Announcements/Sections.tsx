@@ -21,4 +21,4 @@ const Sections = ({ section, setSection }) => {
     )
 }
 
-export default Sections
+export default Sections;

@@ -9,12 +9,16 @@ import Slider from '../navigation/Slider/Slider'
 import SliderContent from '../navigation/Slider/SliderContent'
 import { View } from 'react-native'
 import useLock from '../hooks/useLock'
+import { observer } from 'mobx-react-lite'
+import ChooseLanguage from './Login/ChooseLanguage'
+import { getText } from './Login/hooks/getText'
 
 const ProfileScreen = () => {
 
     const { s, vs } = useScale();
 
     useLock()
+    getText()
 
     const translateY = useSharedValue<number>(0);
 
@@ -42,20 +46,24 @@ const ProfileScreen = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Animated.ScrollView contentContainerStyle={{ alignItems: 'center', rowGap: vs(25), padding: vs(20), flex: 1 }} style={[ animatedUp, { backgroundColor: 'white' }]}>
+            <Animated.ScrollView contentContainerStyle={{ alignItems: 'center', rowGap: vs(25), padding: vs(20) }} style={[ animatedUp, { backgroundColor: 'white' }]}>
             
                 <MainInfo name={name} birthday={birthday} children={children} />
 
                 <PersonalInfo gender={gender} birthday={birthday} email={email} profile={profile} translateY={translateY} defaultFirstName={firstName} defaultLastName={lastName} defaultFatherName={fatherName} defaultPhone={phone} defaultAddress={address?.address} fullAddress={address} />
 
+                <ChooseLanguage color={'white'} thinking={loading} />
+
                 <Buttons />
 
             </Animated.ScrollView>
+
             <Slider>
                 <SliderContent />
             </Slider>
+            
         </View>
     )
 }
 
-export default ProfileScreen;
+export default observer(ProfileScreen);

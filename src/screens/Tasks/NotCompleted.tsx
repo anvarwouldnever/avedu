@@ -3,6 +3,7 @@ import React from 'react'
 import Animated from 'react-native-reanimated';
 import { useScale } from '../../hooks/useScale';
 import { useNavigation } from '@react-navigation/native';
+import { store } from '../../store/store';
 
 const NotCompleted = ({ section, getEnteringAnimation, notCompleted }) => {
 
@@ -43,7 +44,7 @@ const NotCompleted = ({ section, getEnteringAnimation, notCompleted }) => {
 
                             <View style={{ padding: vs(5), backgroundColor: '#FCEEF5', borderRadius: 50, justifyContent: 'center', width: '60%', alignItems: 'center'}}>
                                 
-                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#E05A9A', fontWeight: '500' }}>не выполнено</Text>
+                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#E05A9A', fontWeight: '500' }}>{store.text?.labes?.work_undone}</Text>
                             
                             </View>
 

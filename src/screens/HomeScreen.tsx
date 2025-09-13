@@ -1,5 +1,5 @@
 import { ScrollView, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useScale } from '../hooks/useScale'
 import InfoContainer from './Home/InfoContainer'
 import ChildStats from './Home/ChildStats'
@@ -8,12 +8,22 @@ import { observer } from 'mobx-react-lite'
 import Slider from '../navigation/Slider/Slider'
 import SliderContent from '../navigation/Slider/SliderContent'
 import useLock from '../hooks/useLock'
+import { getText } from './Login/hooks/getText'
+import * as SplashScreen from 'expo-splash-screen';
 
 const HomeScreen = () => {
 
     const { s, vs } = useScale()
 
+    const { loading, error } = getText()
+
     useLock()
+
+    useEffect(() => {
+        if (!loading) {
+            SplashScreen.hideAsync();
+        }
+    }, [loading])
 
     return (
         <View style={{ flex: 1 }}>

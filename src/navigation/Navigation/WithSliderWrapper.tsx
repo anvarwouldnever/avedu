@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import Navigation from './Navigation';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { navigationStore } from '../NavigationStore';
 import { observer } from 'mobx-react-lite';
+import { navigationRef } from '../../utils/navigationReset';
 
 const WithSliderWrapper = () => {
-    const [sliderOpen, setSliderOpen] = useState(false);
-
-    const navigationRef = useNavigationContainerRef();
 
     useEffect(() => {
         const unsubscribe = navigationRef.addListener('state', () => {

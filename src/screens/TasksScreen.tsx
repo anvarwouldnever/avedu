@@ -38,8 +38,6 @@ const TasksScreen = () => {
         setSection(newSection)
     }
 
-    const states =  ['', 'started', 'done']
-
     const { tasks, loading, error } = getTasks()
 
     const notCompleted = tasks?.data.filter(

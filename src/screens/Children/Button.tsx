@@ -4,6 +4,7 @@ import { useScale } from '../../hooks/useScale'
 import * as SecureStore from 'expo-secure-store';
 import { useNavigation } from '@react-navigation/native';
 import { homeScreenStore } from '../Home/store/homeScreenStore';
+import { store } from '../../store/store';
 
 const Button = ({ selectedId, children }) => {
 
@@ -33,7 +34,7 @@ const Button = ({ selectedId, children }) => {
 
     return (
         <TouchableOpacity onPress={selectedId ? () => handlePress() : () => {}} style={{ backgroundColor: 'white', width: '70%', opacity: selectedId ? 1 : 0.5, borderWidth: 1, borderColor: '#6A5AE0', justifyContent: 'center', alignItems: 'center', height: 'auto', padding: vs(10), borderRadius: vs(15), alignSelf: 'center' }}>
-            <Text style={{ fontSize: isTablet ? vs(14) : vs(12), fontWeight: '600', color: '#6A5AE0'  }}>Продолжить</Text>
+            <Text style={{ fontSize: isTablet ? vs(14) : vs(12), fontWeight: '600', color: '#6A5AE0'  }}>{store?.text.labes.continue}</Text>
         </TouchableOpacity>
     )
 }

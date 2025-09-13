@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GetChildren } from '../../../api/methods/children/children';
+import { alertHandler } from '../../../utils/alertHandler';
+import { checkNetwork } from '../../../utils/checkNetwork';
 
 export const getChildren = () => {
 
@@ -10,6 +12,8 @@ export const getChildren = () => {
     useEffect(() => {
         const fetchChildren = async () => {
             try {
+                const network = await checkNetwork()
+                if (!network) { alertHandler(); return; }
                 const response = await GetChildren()
                 setChildren(response?.data)
             } catch (e) {

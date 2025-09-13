@@ -3,6 +3,7 @@ import React from 'react'
 import Animated from 'react-native-reanimated';
 import { useScale } from '../../hooks/useScale';
 import { useNavigation } from '@react-navigation/native';
+import { store } from '../../store/store';
 
 const InProcess = ({ section, getEnteringAnimation, inProcess }) => {
 
@@ -40,7 +41,7 @@ const InProcess = ({ section, getEnteringAnimation, inProcess }) => {
                                 <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>{subject}</Text>
 
                                 <View style={{ padding: vs(5), backgroundColor: '#EFEEFC', borderRadius: 50, justifyContent: 'center', width: '50%', alignItems: 'center'}}>
-                                    <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#6A5AE0', fontWeight: '500' }}>в процессе</Text>
+                                    <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#6A5AE0', fontWeight: '500' }}>{store.text?.labes?.work_progress}</Text>
                                 </View>
 
                         </View>

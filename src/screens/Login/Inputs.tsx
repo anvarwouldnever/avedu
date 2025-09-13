@@ -3,6 +3,7 @@ import React from 'react'
 import { useScale } from '../../hooks/useScale'
 import { observer } from 'mobx-react-lite';
 import MaskInput from 'react-native-mask-input';
+import { store } from '../../store/store';
 
 const Inputs = ({ setPhone, setPassword, errorMessage, setErrorMessage, phone }) => {
 
@@ -13,7 +14,7 @@ const Inputs = ({ setPhone, setPassword, errorMessage, setErrorMessage, phone })
             
             <View style={{ rowGap: vs(10), width: '100%' }}>
                 
-                <Text style={{ fontSize: isTablet ? vs(14) : vs(12) }}>Введите номер телефона</Text>
+                <Text style={{ fontSize: isTablet ? vs(14) : vs(12) }}>{store.text?.placeholders?.login_phone}</Text>
                 
                 <MaskInput
                     style={{
@@ -52,7 +53,7 @@ const Inputs = ({ setPhone, setPassword, errorMessage, setErrorMessage, phone })
 
             <View style={{gap: vs(10), width: '100%' }}>
                 
-                <Text style={{ fontSize: isTablet ? vs(14) : vs(12) }}>Введите пароль</Text>
+                <Text style={{ fontSize: isTablet ? vs(14) : vs(12) }}>{store.text?.placeholders?.login_pass}</Text>
                 
                 <TextInput 
                     style={{ backgroundColor: 'white', width: '100%', height: vs(40), borderRadius: 15, paddingHorizontal: 20, fontSize: isTablet? vs(14) : vs(12), borderColor: errorMessage? '#EB265D' : 'white', borderWidth: 2, textAlignVertical: 'center', verticalAlign: 'middle' }}
@@ -78,4 +79,4 @@ const Inputs = ({ setPhone, setPassword, errorMessage, setErrorMessage, phone })
     )
 }
 
-export default observer(Inputs);
+export default observer(Inputs)

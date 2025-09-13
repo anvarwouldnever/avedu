@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GetDiary } from '../../../api/methods/diary/diary';
+import { alertHandler } from '../../../utils/alertHandler';
+import { checkNetwork } from '../../../utils/checkNetwork';
 
 export const getDiary = (date: string) => {
 
@@ -10,6 +12,8 @@ export const getDiary = (date: string) => {
     useEffect(() => {
         const fetchDiary = async () => {
             try {
+                const network = await checkNetwork()
+                if (!network) { alertHandler(); return; }
                 const response = await GetDiary(date)
                 setDiary(response?.data)
             } catch (e) {

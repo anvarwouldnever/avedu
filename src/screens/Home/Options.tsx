@@ -3,6 +3,8 @@ import React from 'react'
 import { useScale } from '../../hooks/useScale'
 import { Image } from 'expo-image'
 import { useNavigation } from '@react-navigation/native'
+import { store } from '../../store/store'
+import { observer } from 'mobx-react-lite'
 
 const Options = () => {
 
@@ -17,7 +19,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Примечания</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>{store.text?.feebacks}</Text>
 
             </TouchableOpacity>
 
@@ -25,7 +27,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Задания</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>{store.text?.task}</Text>
 
             </TouchableOpacity>
 
@@ -33,7 +35,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Дневник ребенка</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>{store.text?.menu6}</Text>
 
             </TouchableOpacity>
 
@@ -41,7 +43,7 @@ const Options = () => {
                 
                 <Image contentFit='contain' style={{ width: vs(50), height: vs(50) }} source={require('../../../assets/option.png')} />
                 
-                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Расписание уроков</Text>
+                <Text style={{ color: 'black', fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>{store.text?.menu5}</Text>
 
             </TouchableOpacity>
 
@@ -49,4 +51,4 @@ const Options = () => {
     )
 }
 
-export default Options
+export default observer(Options)

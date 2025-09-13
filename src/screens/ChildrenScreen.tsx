@@ -5,6 +5,7 @@ import { getChildren } from './Children/hooks/getChildren'
 import Children from './Children/Children'
 import Button from './Children/Button'
 import useLock from '../hooks/useLock'
+import { store } from '../store/store'
 
 const ChildrenScreen = () => {
 
@@ -21,7 +22,7 @@ const ChildrenScreen = () => {
             
             <View style={{ height: 'auto', borderRadius: vs(10), width: '100%', padding: vs(20), backgroundColor: 'white', rowGap: vs(30), alignSelf: 'center', position: 'absolute' }}>
                 
-                <Text style={{ fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>Выберите ребенка:</Text>
+                <Text style={{ fontSize: isTablet ? vs(16) : vs(14), fontWeight: '600' }}>{store.text?.placeholders?.choose_child}</Text>
 
                 {children && <Children children={children} selectedId={selectedId} setSelectedId={setSelectedId} />}
 

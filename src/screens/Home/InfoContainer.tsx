@@ -4,8 +4,9 @@ import { useScale } from '../../hooks/useScale';
 import { Image } from 'expo-image';
 import { homeScreenStore } from './store/homeScreenStore';
 import * as SecureStore from 'expo-secure-store';
-import { observer } from 'mobx-react-lite';
 import { isValidImage } from '../../utils/imageValidator';
+import { store } from '../../store/store';
+import { observer } from 'mobx-react-lite';
 
 const InfoContainer = () => {
     
@@ -13,6 +14,7 @@ const InfoContainer = () => {
 
     const cid = SecureStore.getItem('cid');
     const image = homeScreenStore?.childImage;
+    const school = store.text?.title_school
 
     return (
         <View style={{width: '100%', height: 'auto', borderRadius: vs(30), backgroundColor: '#9087E5', padding: vs(20), shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 2, elevation: 7,}}>
@@ -23,7 +25,7 @@ const InfoContainer = () => {
                     
                     <Text style={{fontSize: isTablet? vs(18) : vs(16), color: 'white', fontWeight: '600', lineHeight: isTablet? vs(22) : s(22), marginBottom: vs(5), flexShrink: 1}}>{homeScreenStore.childName}</Text>
 
-                    <Text style={{fontSize: isTablet? vs(18) : vs(14), color: 'white', fontWeight: '500', lineHeight: isTablet? vs(22) : s(22)}}>Школа: {homeScreenStore.childSchool}</Text>
+                    <Text style={{fontSize: isTablet? vs(18) : vs(14), color: 'white', fontWeight: '500', lineHeight: isTablet? vs(22) : s(22)}}>{school} {homeScreenStore.childSchool}</Text>
 
                     {/* <Text style={{fontSize: isTablet? vs(16) : s(16), color: 'white', fontWeight: '500', lineHeight: isTablet? vs(22) : s(22)}}>1 А Класс</Text> */}
 

@@ -3,8 +3,7 @@ import {
   StyleSheet,
   View,
   Text,
-  Pressable,
-  Platform,
+  Pressable
 } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -21,17 +20,14 @@ const Slider = ({
   children?: React.ReactNode;
 }) => {
 
-  const { s, vs, windowWidth } = useScale()
+  const { s, vs, windowWidth, isTablet } = useScale()
 
-  const SLIDER_WIDTH = Platform.isPad? windowWidth * 0.5 : windowWidth * 0.75;
+  const SLIDER_WIDTH = isTablet? windowWidth * 0.5 : windowWidth * 0.75;
 
   const translateX = useSharedValue(-SLIDER_WIDTH);
 
   React.useEffect(() => {
-    translateX.value = withSpring(navigationStore.openSlider ? 0 : -SLIDER_WIDTH, {
-      damping: 25,
-      stiffness: 200,
-    });
+    translateX.value = withSpring(navigationStore.openSlider ? 0 : -SLIDER_WIDTH);
   }, [navigationStore.openSlider, SLIDER_WIDTH]);
 
   const sliderStyle = useAnimatedStyle(() => ({
@@ -44,7 +40,7 @@ const Slider = ({
             <Pressable style={[styles.backdrop, {left: SLIDER_WIDTH}]} onPress={() => navigationStore.setOpenSlider(false)} />
           )}
 
-          <Animated.View style={[styles.slider, sliderStyle, {width: SLIDER_WIDTH, paddingTop: Platform.isPad ? vs(10) : vs(20), rowGap: vs(10)}]}>
+          <Animated.View style={[styles.slider, sliderStyle, {width: SLIDER_WIDTH, paddingTop: isTablet ? vs(10) : vs(20), rowGap: vs(10)}]}>
             
             {children ?? (
               <Text style={{ color: 'white', fontSize: 18 }}>Пусто</Text>

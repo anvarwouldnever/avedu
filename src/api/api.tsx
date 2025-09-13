@@ -20,7 +20,7 @@ api.interceptors.request.use(
             }
         }
 
-        config.headers['X-Localization'] = store?.language || 'ru';
+        config.headers['localization'] = store?.language || 'ru';
         config.headers['cid'] = cid;
         
         return config;

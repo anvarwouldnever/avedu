@@ -3,6 +3,7 @@ import React from 'react'
 import { useScale } from '../../hooks/useScale';
 import { Image } from 'expo-image';
 import { isValidImage } from '../../utils/imageValidator';
+import { store } from '../../store/store'
 
 const Task = ({ startDate, title, taskTitle, subject, isTimeLimit, givenTime, baseColor, color, image }) => {
 
@@ -32,12 +33,12 @@ const Task = ({ startDate, title, taskTitle, subject, isTimeLimit, givenTime, ba
 
                     <Text style={{ fontSize: isTablet? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>{taskTitle}</Text>
         
-                    <View style={{ flexDirection: 'row', gap: vs(5), alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', gap: vs(5), alignItems: 'center', overflow: 'hidden' }}>
 
-                        <Text style={{ fontSize: isTablet? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>Дата начала:</Text>
+                        <Text style={{ fontSize: isTablet? vs(14) : vs(12), fontWeight: '500', color: '#36355A' }}>{store.text?.started_at}</Text>
 
-                        <View style={{ padding: vs(5), backgroundColor: baseColor, justifyContent: 'center', width: '60%', alignItems: 'center', borderRadius: 5 }}>
-                            <Text style={{ fontSize: isTablet ? vs(12) : vs(10), color: color, fontWeight: '500', lineHeight: 20, textAlign: 'center' }}>{startDate ?? 'Неизвестно'}</Text>
+                        <View style={{ padding: vs(5), backgroundColor: baseColor, justifyContent: 'center', width: '45%', alignItems: 'center', borderRadius: 5 }}>
+                            <Text style={{ fontSize: isTablet ? vs(12) : vs(10), color: color, fontWeight: '500', lineHeight: 20, textAlign: 'center' }}>{startDate ?? store.text?.labes?.not_install}</Text>
                         </View>
 
                     </View>
@@ -47,11 +48,13 @@ const Task = ({ startDate, title, taskTitle, subject, isTimeLimit, givenTime, ba
             </View>  
 
             <View style={{ position: 'absolute', width: '80%', height: 'auto', bottom: 0, alignSelf: 'center', backgroundColor: baseColor, paddingVertical: vs(5), borderTopRightRadius: 10, borderTopLeftRadius: 10 }}>
-                <Text numberOfLines={1} style={{ fontSize: isTablet? vs(14) : vs(12), color: color, fontWeight: '500', textAlign: 'center' }}>Время на решение: {isTimeLimit ? givenTime : 'не установлено'}</Text>
+                <Text numberOfLines={1} style={{ fontSize: isTablet? vs(14) : vs(12), color: color, fontWeight: '500', textAlign: 'center' }}>
+                    {store.text?.labes?.time_limit}: {isTimeLimit ? givenTime : store.text?.labes?.not_install}
+                </Text>
             </View>
                         
         </View>
     )
 }
 
-export default Task
+export default Task 

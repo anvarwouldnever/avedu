@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native'
 import { useScale } from '../../hooks/useScale'
 import * as SecureStore from 'expo-secure-store';
 import { Login } from '../../api/methods/login/login';
+import { store } from '../../store/store';
+import { observer } from 'mobx-react-lite';
 
 const LoginButton = ({ phone, password, setErrorMessage, setThinking, thinking }) => {
 
@@ -54,11 +56,11 @@ const LoginButton = ({ phone, password, setErrorMessage, setThinking, thinking }
             {thinking ? (
                 <ActivityIndicator size="small" color="#fff" />
             ) : (
-                <Text style={{ color: 'white', fontWeight: '600', fontSize: isTablet? vs(16) : vs(14) }}>Войти</Text>
+                <Text style={{ color: 'white', fontWeight: '600', fontSize: isTablet? vs(16) : vs(14) }}>{store.text?.buttons?.login_enter}</Text>
             )}
             
         </TouchableOpacity>
     )
 }
 
-export default LoginButton;
+export default observer(LoginButton);

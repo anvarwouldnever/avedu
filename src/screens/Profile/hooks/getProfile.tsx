@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GetProfile } from '../../../api/methods/profile/profile';
+import { alertHandler } from '../../../utils/alertHandler';
+import { checkNetwork } from '../../../utils/checkNetwork';
 
 export const getProfile = () => {
 
@@ -10,6 +12,8 @@ export const getProfile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
+                const network = await checkNetwork()
+                if (!network) { alertHandler(); return; }
                 const response = await GetProfile()
                 setProfile(response?.data)
             } catch (e) {

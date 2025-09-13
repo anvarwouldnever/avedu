@@ -3,6 +3,7 @@ import React from 'react'
 import Animated from 'react-native-reanimated'
 import { useScale } from '../../hooks/useScale'
 import { useNavigation } from '@react-navigation/native'
+import { store } from '../../store/store'
 
 const Completed = ({ section, getEnteringAnimation, completed }) => {
 
@@ -35,12 +36,12 @@ const Completed = ({ section, getEnteringAnimation, completed }) => {
 
                         <View style={{ height: 'auto', width: '60%', justifyContent: 'space-between' }}>
 
-                             <Text style={{ fontSize: vs(16), fontWeight: '500', color: '#36355A' }}>{title}</Text>
+                            <Text style={{ fontSize: vs(16), fontWeight: '500', color: '#36355A' }}>{title}</Text>
 
                             <Text style={{ fontSize: vs(12), fontWeight: '500', color: '#36355A' }}>{subject}</Text>
 
                             <View style={{ padding: vs(5), backgroundColor: '#F0FCEE', borderRadius: 50, justifyContent: 'center', width: '50%', alignItems: 'center'}}>
-                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#59E956', fontWeight: '500' }}>выполнено</Text>
+                                <Text style={{ fontSize: isTablet ? vs(14) : vs(12), color: '#59E956', fontWeight: '500' }}>{store.text?.labes?.work_done}</Text>
                             </View>
 
                         </View>

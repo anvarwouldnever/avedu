@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { PutProfile } from '../../../api/methods/profile/update';
+import { alertHandler } from '../../../utils/alertHandler';
+import { checkNetwork } from '../../../utils/checkNetwork';
 
 export const putProfile = () => {
     const [loading, setLoading] = useState(false);
@@ -12,6 +14,8 @@ export const putProfile = () => {
         setSuccess(false);
 
         try {
+            const network = await checkNetwork()
+            if (!network) { alertHandler(); return; }
             const response = await PutProfile( firstName, lastName, fatherName, gender, birthday, email, address);
             setSuccess(true);
             return response?.data;

@@ -7,6 +7,7 @@ import { getDiary } from './Diary/hooks/getDiary'
 import Slider from '../navigation/Slider/Slider'
 import SliderContent from '../navigation/Slider/SliderContent'
 import useLock from '../hooks/useLock'
+import { store } from '../store/store'
 
 const DiaryScreen = () => {
 
@@ -33,7 +34,7 @@ const DiaryScreen = () => {
         <View style={{ flex: 1 }}>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ alignItems: 'center', padding: vs(20), rowGap: vs(25), flex: 1 }} style={{ backgroundColor: 'white' }}>
                 
-                <Text style={{ fontSize: isTablet ? vs(18) : vs(16) }}>Выберите дату</Text>
+                <Text style={{ fontSize: isTablet ? vs(18) : vs(16) }}>{store.text?.placeholders?.data_select}</Text>
 
                 <Calendar show={show} setShow={setShow} date={date} onConfirm={(d) => setDate(d)}/>
 

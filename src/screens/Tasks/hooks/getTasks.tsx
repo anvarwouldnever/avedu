@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GetTasks } from '../../../api/methods/tasks/tasks';
+import { alertHandler } from '../../../utils/alertHandler';
+import { checkNetwork } from '../../../utils/checkNetwork';
 
 export const getTasks = () => {
 
@@ -11,6 +13,8 @@ export const getTasks = () => {
 
         const fetchTasks = async () => {
             try {
+                const network = await checkNetwork()
+                if (!network) { alertHandler(); return; }
                 const response = await GetTasks();
                 setTasks(response?.data);
             } catch (e: any) {

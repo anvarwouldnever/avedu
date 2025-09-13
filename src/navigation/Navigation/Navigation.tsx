@@ -16,7 +16,6 @@ import TaskScreen from '../../screens/TaskScreen';
 import LoginScreen from '../../screens/LoginScreen';
 import ChildrenScreen from '../../screens/ChildrenScreen';
 import HeaderRight from './HeaderRight';
-import { navigationStore } from '../NavigationStore';
 
 const Stack = createStackNavigator();
 
